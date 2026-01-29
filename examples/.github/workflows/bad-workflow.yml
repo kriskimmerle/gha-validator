@@ -1,0 +1,17 @@
+name: Bad Workflow Example
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    # Missing runs-on!
+    steps:
+      - uses: actions/checkout  # Missing version @v3
+      - name: Run tests
+        run: npm test
+  
+  deploy:
+    runs-on: ubuntu-latest
+    uses: ./.github/workflows/deploy.yml  # Missing @ref for reusable workflow
